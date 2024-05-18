@@ -2,26 +2,76 @@ type emotion = { label: string; subEmotions: emotion[] };
 
 export const emotions: emotion[] = [
   {
-    label: "Fearful",
+    label: "Anger",
     subEmotions: [
       {
-        label: "Scared",
+        label: "Hurt",
         subEmotions: [
           {
-            label: "Helpless",
+            label: "Embarrassed",
             subEmotions: [],
           },
-          { label: "Frightened", subEmotions: [] },
+          { label: "Devastated", subEmotions: [] },
         ],
       },
       {
-        label: "Anxious",
+        label: "Threatened",
         subEmotions: [
           {
-            label: "Overwhelmed",
+            label: "Insecure",
             subEmotions: [],
           },
-          { label: "Worried", subEmotions: [] },
+          { label: "Jealous", subEmotions: [] },
+        ],
+      },
+      {
+        label: "Hateful",
+        subEmotions: [
+          {
+            label: "Resentful",
+            subEmotions: [],
+          },
+          { label: "Violated", subEmotions: [] },
+        ],
+      },
+      {
+        label: "Mad",
+        subEmotions: [
+          {
+            label: "Furious",
+            subEmotions: [],
+          },
+          { label: "Enraged", subEmotions: [] },
+        ],
+      },
+      {
+        label: "Aggressive",
+        subEmotions: [
+          {
+            label: "Provoked",
+            subEmotions: [],
+          },
+          { label: "Hostile", subEmotions: [] },
+        ],
+      },
+      {
+        label: "Frustrated",
+        subEmotions: [
+          {
+            label: "Infuriated",
+            subEmotions: [],
+          },
+          { label: "Irritated", subEmotions: [] },
+        ],
+      },
+      {
+        label: "Distant",
+        subEmotions: [
+          {
+            label: "Withdrawn",
+            subEmotions: [],
+          },
+          { label: "Suspicious", subEmotions: [] },
         ],
       },
     ],
