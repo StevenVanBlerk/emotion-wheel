@@ -1,3 +1,5 @@
 import EmotionWheel from "./EmotionWheel";
+import SelectedEmotions from "./SelectedEmotions";
+import IntrospectiveQuestions from "./IntrospectiveQuestions";
 
-export { EmotionWheel };
+export { EmotionWheel, SelectedEmotions, IntrospectiveQuestions };
