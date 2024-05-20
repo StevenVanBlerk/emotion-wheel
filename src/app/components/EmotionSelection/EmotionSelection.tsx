@@ -18,7 +18,10 @@ const EmotionSelection = ({ appendToEmotionGroup }: EmotionSelectionProps) => {
     string[]
   >([]);
 
-  const resetEmotions = () => setEmotions(initialEmotions);
+  const resetEmotions = () => {
+    setEmotions(initialEmotions);
+    setSelectedEmotionKeySequence([]);
+  };
   return (
     <EmotionList
       emotions={emotions}
