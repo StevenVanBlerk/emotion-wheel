@@ -17,6 +17,7 @@ export default function Home() {
     staticEmotions.forEach((staticEmotion) => {
       const emotion = {
         label: staticEmotion.label,
+        color: staticEmotion.color,
         isSelected: false,
         isActive: [
           "Anger",

@@ -3,6 +3,7 @@ import { StaticEmotion } from "../types/emotions";
 export const staticEmotions: StaticEmotion[] = [
   {
     label: "Anger",
+    color: "pink",
     subEmotions: [
       {
         label: "Hurt",
@@ -89,6 +90,7 @@ export const staticEmotions: StaticEmotion[] = [
 
   {
     label: "Disgust",
+    color: "brown",
     subEmotions: [
       {
         label: "Disapproval",
@@ -122,6 +124,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Sad",
+    color: "lightblue",
     subEmotions: [
       {
         label: "Guilty",
@@ -169,6 +172,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Happy",
+    color: "orange",
     subEmotions: [
       {
         label: "Optimistic",
@@ -230,6 +234,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Surprise",
+    color: "lightgreen",
     subEmotions: [
       {
         label: "Excited",
@@ -263,6 +268,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Fear",
+    color: "yellow",
     subEmotions: [
       {
         label: "Scared",
