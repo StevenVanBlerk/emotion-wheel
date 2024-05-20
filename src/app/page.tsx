@@ -1,51 +1,25 @@
 "use client";
 
 import {
-  EmotionList,
   SelectedEmotions,
   IntrospectiveQuestions,
+  EmotionSelection,
 } from "./components";
-import { useEffect, useState } from "react";
-import {
-  evaluateActiveStates,
-  formatEmotionsInitialState,
-  getSelectedEmotionLabels,
-  onEmotionSelect,
-  staticEmotions,
-} from "./utils/emotions";
-import { EmotionMap } from "./types/emotions";
+import { useState } from "react";
 
 export default function Home() {
-  const [emotions, setEmotions] = useState<EmotionMap>(
-    formatEmotionsInitialState(staticEmotions),
-  );
-  const [selectedEmotionLabels, setSelectedEmotionLabels] = useState<string[]>(
-    [],
-  );
+  const [emotionGroup, setEmotionGroup] = useState<string[][]>([]);
 
-  // An emotion was selected. Reevaluate selected labels
-  useEffect(() => {
-    const newSelectedEmotionLabels = getSelectedEmotionLabels(emotions);
-    setSelectedEmotionLabels(newSelectedEmotionLabels);
-  }, [emotions]);
-
-  // An emotion was selected. Reevaluate active states
-  useEffect(() => {
-    evaluateActiveStates(setEmotions, selectedEmotionLabels);
-  }, [selectedEmotionLabels]);
-
+  const appendToEmotionGroup = (emotionKeySequence: string[]) => {
+    setEmotionGroup((previousState) => [...previousState, emotionKeySequence]);
+  };
   return (
     <main className="flex min-h-screen flex-col items-center p-24 text-base">
-      <EmotionList
-        emotions={emotions}
-        onEmotionSelect={(emotionKeySequence) => {
-          onEmotionSelect(emotionKeySequence, emotions, setEmotions);
-        }}
-      />
+      <EmotionSelection appendToEmotionGroup={appendToEmotionGroup} />
 
-      <SelectedEmotions selectedEmotionLabels={selectedEmotionLabels} />
+      <SelectedEmotions emotionGroup={emotionGroup} />
 
-      {/* <IntrospectiveQuestions /> */}
+      <IntrospectiveQuestions />
     </main>
   );
 }

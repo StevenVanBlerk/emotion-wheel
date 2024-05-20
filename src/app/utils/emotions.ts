@@ -1,5 +1,5 @@
 import React from "react";
-import { EmotionMap, StaticEmotion } from "../types/emotions";
+import { Emotion, EmotionMap, StaticEmotion } from "../types/emotions";
 
 const selectEmotion = (
   emotionKeySequence: string[],
@@ -99,24 +99,49 @@ export const onEmotionSelect = (
 
 export const evaluateActiveStates = (
   setEmotions: React.Dispatch<React.SetStateAction<EmotionMap>>,
-  selectedEmotionLabels: string[],
+  selectedEmotionKeySequence: string[],
 ) => {
   setEmotions((previousState) => {
     const emotionsCopy: EmotionMap = JSON.parse(JSON.stringify(previousState));
     Object.values(emotionsCopy).forEach((emotionT0) => {
+      // T0 emotions are active if no emotions are selected OR that specific emotion is selected
       let isT0Active =
-        selectedEmotionLabels.length == 0
+        selectedEmotionKeySequence.length == 0
           ? true
-          : selectedEmotionLabels.includes(emotionT0.label);
+          : selectedEmotionKeySequence.includes(emotionT0.label);
       emotionT0.isActive = isT0Active;
 
       Object.values(emotionT0.subEmotions).forEach((emotionT1) => {
-        let isT1Active = selectedEmotionLabels.includes(emotionT0.label);
-        emotionT1.isActive = isT1Active;
+        // T1 emotions are inactive if their T0 parent is NOT selected
+        let isT1Active = true;
+        if (!selectedEmotionKeySequence.includes(emotionT0.label))
+          isT1Active = false;
+        // T1 emotions are inactive if any T1 siblings are selected
+        for (const siblingKey in emotionT1.subEmotions) {
+          const siblingEmotion = emotionT1.subEmotions[siblingKey];
+          if (
+            siblingEmotion.label !== emotionT1.label &&
+            siblingEmotion.isSelected
+          ) {
+            isT1Active = false;
+          }
+        }
 
         Object.values(emotionT1.subEmotions).forEach((emotionT2) => {
-          let isT2Active = selectedEmotionLabels.includes(emotionT1.label);
-          emotionT2.isActive = isT2Active;
+          // T1 emotions are inactive if their T0 parent is NOT selected
+          let isT2Active = true;
+          if (!selectedEmotionKeySequence.includes(emotionT1.label))
+            isT2Active = false;
+          // T2 emotions are inactive if any T2 siblings are selected
+          for (const siblingKey in emotionT2.subEmotions) {
+            const siblingEmotion = emotionT2.subEmotions[siblingKey];
+            if (
+              siblingEmotion.label !== emotionT2.label &&
+              siblingEmotion.isSelected
+            ) {
+              isT2Active = false;
+            }
+          }
         });
       });
     });
@@ -126,18 +151,20 @@ export const evaluateActiveStates = (
 };
 
 export const getSelectedEmotionLabels = (emotions: EmotionMap) => {
-  let selectedEmotionLabels: string[] = [];
+  let selectedEmotionKeySequence: string[] = [];
   Object.values(emotions).forEach((emotionT0) => {
-    if (emotionT0.isSelected) selectedEmotionLabels.push(emotionT0.label);
+    if (emotionT0.isSelected) selectedEmotionKeySequence.push(emotionT0.label);
     Object.values(emotionT0.subEmotions).forEach((emotionT1) => {
-      if (emotionT1.isSelected) selectedEmotionLabels.push(emotionT1.label);
+      if (emotionT1.isSelected)
+        selectedEmotionKeySequence.push(emotionT1.label);
       Object.values(emotionT1.subEmotions).forEach((emotionT2) => {
-        if (emotionT2.isSelected) selectedEmotionLabels.push(emotionT2.label);
+        if (emotionT2.isSelected)
+          selectedEmotionKeySequence.push(emotionT2.label);
       });
     });
   });
 
-  return selectedEmotionLabels;
+  return selectedEmotionKeySequence;
 };
 
 export const formatEmotionsInitialState = (

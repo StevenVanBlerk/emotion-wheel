@@ -1,11 +1,13 @@
-type SelectedEmotionsProps = { selectedEmotionLabels: string[] };
+type SelectedEmotionsProps = { emotionGroup: string[][] };
 
-const SelectedEmotions = ({ selectedEmotionLabels }: SelectedEmotionsProps) => {
+const SelectedEmotions = ({ emotionGroup }: SelectedEmotionsProps) => {
   return (
     <div>
       <ul>
-        {selectedEmotionLabels.map((emotion) => {
-          return <li key={emotion}>{emotion}</li>;
+        {emotionGroup.map((emotionKeySequence) => {
+          const [emotionKeyT0, emotionKeyT1, emotionKeyT2] = emotionKeySequence;
+          const emotionLabel = emotionKeyT2 || emotionKeyT1 || emotionKeyT0;
+          return <li key={emotionLabel}>{emotionLabel}</li>;
         })}
       </ul>
     </div>
