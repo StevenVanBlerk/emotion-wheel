@@ -7,7 +7,7 @@ import {
 } from "./components";
 import { useState } from "react";
 import { staticEmotions } from "./utils/emotions";
-import { StaticEmotion, EmotionMap } from "./types/emotions";
+import { StaticEmotion, EmotionMap, Emotion } from "./types/emotions";
 
 export default function Home() {
   const formatEmotionsInitialState = (
@@ -18,6 +18,14 @@ export default function Home() {
       const emotion = {
         label: staticEmotion.label,
         isSelected: false,
+        isActive: [
+          "Anger",
+          "Disgust",
+          "Sad",
+          "Happy",
+          "Surprise",
+          "Fear",
+        ].includes(staticEmotion.label),
         subEmotions: formatEmotionsInitialState(staticEmotion.subEmotions),
       };
       formattedEmotions[emotion.label] = emotion;
@@ -28,24 +36,76 @@ export default function Home() {
   const [emotions, setEmotions] = useState<EmotionMap>(
     formatEmotionsInitialState(staticEmotions),
   );
+  const [selectedEmotionLabels, setSelectedEmotionLabels] = useState<string[]>(
+    [],
+  );
+
+  const evaluateActiveStates = (
+    emotionsCopy: EmotionMap,
+    newSelectedEmotionLabels: string[],
+  ) => {
+    Object.values(emotionsCopy).forEach((emotionT0) => {
+      let isT0Active =
+        newSelectedEmotionLabels.length == 0
+          ? true
+          : newSelectedEmotionLabels.includes(emotionT0.label);
+      emotionT0.isActive = isT0Active;
+
+      Object.values(emotionT0.subEmotions).forEach((emotionT1) => {
+        let isT1Active = newSelectedEmotionLabels.includes(emotionT0.label);
+        emotionT1.isActive = isT1Active;
+
+        Object.values(emotionT1.subEmotions).forEach((emotionT2) => {
+          let isT2Active = newSelectedEmotionLabels.includes(emotionT1.label);
+          emotionT2.isActive = isT2Active;
+        });
+      });
+    });
+  };
 
   const onEmotionSelect = (emotionKeySequence: string[]) => {
     const newEmotions: EmotionMap = JSON.parse(JSON.stringify(emotions));
+    let newSelectedEmotionLabels = [];
     const [keyT0, keyT1, keyT2] = emotionKeySequence;
 
     if (keyT2) {
       const relevantEmotion =
         newEmotions[keyT0].subEmotions[keyT1].subEmotions[keyT2];
       relevantEmotion.isSelected = !relevantEmotion.isSelected;
+
+      newSelectedEmotionLabels = selectedEmotionLabels.includes(
+        relevantEmotion.label,
+      )
+        ? selectedEmotionLabels.filter(
+            (label) => label !== relevantEmotion.label,
+          )
+        : [...selectedEmotionLabels, relevantEmotion.label];
     } else if (keyT1) {
       const relevantEmotion = newEmotions[keyT0].subEmotions[keyT1];
       relevantEmotion.isSelected = !relevantEmotion.isSelected;
+
+      newSelectedEmotionLabels = selectedEmotionLabels.includes(
+        relevantEmotion.label,
+      )
+        ? selectedEmotionLabels.filter(
+            (label) => label !== relevantEmotion.label,
+          )
+        : [...selectedEmotionLabels, relevantEmotion.label];
     } else {
       const relevantEmotion = newEmotions[keyT0];
       relevantEmotion.isSelected = !relevantEmotion.isSelected;
+      newSelectedEmotionLabels = selectedEmotionLabels.includes(
+        relevantEmotion.label,
+      )
+        ? selectedEmotionLabels.filter(
+            (label) => label !== relevantEmotion.label,
+          )
+        : [...selectedEmotionLabels, relevantEmotion.label];
     }
 
+    evaluateActiveStates(newEmotions, newSelectedEmotionLabels);
     setEmotions(newEmotions);
+    setSelectedEmotionLabels(newSelectedEmotionLabels);
   };
 
   return (
