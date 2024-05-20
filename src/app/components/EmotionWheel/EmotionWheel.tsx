@@ -21,6 +21,7 @@ const EmotionWheel = ({ emotions, onEmotionSelect }: EmotionWheelProps) => {
             height: "300px",
             border: "1px dashed lightblue",
             placeContent: "center",
+            // TO-DO: add background image here that is a collection of slice colors. This one image will act as all slice backgrounds
           }}
         >
           {emotionsArray.map(([keyT0, emotion], index) => {

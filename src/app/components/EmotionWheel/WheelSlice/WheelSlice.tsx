@@ -14,11 +14,14 @@ const WheelSlice = ({
   sliceIndex,
   onEmotionSelect,
 }: WheelSliceProps) => {
+  const subEmotionsT1 = Object.entries(emotion.subEmotions);
+
+  const sliceRotation = sliceWidth * sliceIndex; // How far this slice is rotated in degrees
   return (
     <div
       style={{
         position: "absolute", // absolute so that all slices have the same origin point (no offset for later slices)
-        transform: `translate(50%, -50%) rotate(${sliceWidth * sliceIndex}deg)`, // center within RotatableContainer and rotate that slice
+        transform: `translate(50%, -50%) rotate(${sliceRotation}deg)`, // center within RotatableContainer and rotate that slice
         transformOrigin: "left", // rotating slice from LHS
         width: "100%",
         border: "1px dashed lightgreen",
@@ -26,8 +29,33 @@ const WheelSlice = ({
         transition: "opacity .25s ease-in-out",
       }}
     >
-      <div style={{ background: emotion.color }}>
-        {/* Anger */}
+      <div>
+        {/* Hurt T1 */}
+        {emotion.label === "Anger" && (
+          <div
+            style={{
+              // transform: `rotate(${sliceRotation}deg)`
+              transform: `rotate(-30deg)`,
+            }}
+          >
+            {subEmotionsT1.map(([keyT1, emotionT1], indexT1) => {
+              return (
+                <div
+                  style={{
+                    position: "absolute",
+                    // transform: `rotate(${sliceWidth * indexT1}deg)`,
+                    marginLeft: "150px",
+                    transform: `translate(0%, ${(indexT1 - 1) * 100}%)`,
+                    transformOrigin: "left", // rotating slice from LHS
+                  }}
+                >
+                  {emotionT1.label}
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {/* Anger T0 */}
         <p
           style={{
             marginLeft: "30px",
