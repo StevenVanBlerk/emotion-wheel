@@ -41,6 +41,7 @@ const WheelSlice = ({
             {subEmotionsT1.map(([keyT1, emotionT1], indexT1) => {
               return (
                 <div
+                  key={keyT1}
                   style={{
                     position: "absolute",
                     // transform: `rotate(${sliceWidth * indexT1}deg)`,
