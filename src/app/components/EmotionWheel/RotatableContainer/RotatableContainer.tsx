@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState, ReactNode } from "react";
 
+// TO-DO: remove all any types
 const RotatableContainer = ({ children }: { children: ReactNode }) => {
-  const [rotateGesture, setRotateGesture] = useState(false);
-  const rotateBtnRef = useRef(null);
-  const [origin, setOrigin] = useState();
-  const [mouseOldPos, setMouseOldPos] = useState();
-  const [rotation, setRotation] = useState(0);
-  const rotatableElRef = useRef(null);
+  const [rotateGesture, setRotateGesture] = useState<boolean>(false);
+  const rotateBtnRef = useRef<any>(null);
+  const [origin, setOrigin] = useState<any>();
+  const [mouseOldPos, setMouseOldPos] = useState<any>();
+  const [rotation, setRotation] = useState<number>(0);
+  const rotatableElRef = useRef<any>(null);
 
-  const handleRotate = ({ mouseViewportX, mouseViewportY }) => {
+  const handleRotate = (mouseViewportX: number, mouseViewportY: number) => {
     const angle1 = getAngle({
       x: mouseViewportX - origin.x,
       y: origin.y - mouseViewportY,
@@ -21,7 +22,7 @@ const RotatableContainer = ({ children }: { children: ReactNode }) => {
     setRotation(rotation + delta);
   };
 
-  const onMouseMove = (event) => {
+  const onMouseMove = (event: any) => {
     const flags = event.buttons !== undefined ? event.buttons : event.which;
     const primaryMouseButtonDown = (flags & 1) === 1;
     const mouseViewportX = event.pageX - window.scrollX;
@@ -30,7 +31,7 @@ const RotatableContainer = ({ children }: { children: ReactNode }) => {
 
     if (primaryMouseButtonDown) {
       if (rotateGesture) {
-        handleRotate({ mouseViewportX, mouseViewportY });
+        handleRotate(mouseViewportX, mouseViewportY);
         return;
       }
 
@@ -74,7 +75,7 @@ const RotatableContainer = ({ children }: { children: ReactNode }) => {
   );
 };
 
-function isPointInsideElement(point, element) {
+function isPointInsideElement(point: any, element: any) {
   const rect = element.getBoundingClientRect();
   return (
     point.x > rect.left &&
@@ -84,7 +85,7 @@ function isPointInsideElement(point, element) {
   );
 }
 
-function getAngle(point) {
+function getAngle(point: any) {
   if (point.x < 0 && point.y > 0) {
     return 180 + (Math.atan(point.y / point.x) * 180) / Math.PI;
   }
