@@ -1,50 +1,38 @@
 import { EmotionMap } from "@/app/types/emotions";
 import {
-  evaluateActiveStates,
   formatEmotionsInitialState,
-  getSelectedEmotionLabels as getSelectedEmotionKeySequence,
   onEmotionSelect,
   staticEmotions,
 } from "@/app/utils/emotions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import EmotionList from "./EmotionList";
 
 type EmotionSelectionProps = {
   appendToEmotionGroup: (emotionKeySequence: string[]) => void;
 };
-
+const initialEmotions = formatEmotionsInitialState(staticEmotions);
 const EmotionSelection = ({ appendToEmotionGroup }: EmotionSelectionProps) => {
-  const [emotions, setEmotions] = useState<EmotionMap>(
-    formatEmotionsInitialState(staticEmotions),
-  );
+  const [emotions, setEmotions] = useState<EmotionMap>(initialEmotions);
 
   const [selectedEmotionKeySequence, setSelectedEmotionKeySequence] = useState<
     string[]
   >([]);
 
-  // // An emotion was selected. Reevaluate selected key sequence
-  useEffect(() => {
-    const newSelectedEmotionKeySequence =
-      getSelectedEmotionKeySequence(emotions);
-    setSelectedEmotionKeySequence(newSelectedEmotionKeySequence);
-
-    // BUGGED INFINITE CALLS
-    // evaluateActiveStates(setEmotions, newSelectedEmotionKeySequence);
-  }, [emotions]);
-
-  // // An emotion was selected. Reevaluate active states
-  // useEffect(() => {
-  // evaluateActiveStates(setEmotions, selectedEmotionKeySequence);
-  // }, [selectedEmotionKeySequence]);
-
+  const resetEmotions = () => setEmotions(initialEmotions);
   return (
     <EmotionList
       emotions={emotions}
       onFinalEmotionSelect={() => {
         appendToEmotionGroup(selectedEmotionKeySequence);
+        resetEmotions();
       }}
       onEmotionSelect={(emotionKeySequence) => {
-        onEmotionSelect(emotionKeySequence, emotions, setEmotions);
+        onEmotionSelect(
+          emotionKeySequence,
+          JSON.parse(JSON.stringify(emotions)) as EmotionMap,
+          setEmotions,
+          setSelectedEmotionKeySequence,
+        );
       }}
       isAddEmotionDisabled={selectedEmotionKeySequence.length === 0}
     />

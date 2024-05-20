@@ -2,7 +2,7 @@ type SelectedEmotionsProps = { emotionGroup: string[][] };
 
 const SelectedEmotions = ({ emotionGroup }: SelectedEmotionsProps) => {
   return (
-    <div>
+    <div className="mt-8">
       <ul>
         {emotionGroup.map((emotionKeySequence) => {
           const [emotionKeyT0, emotionKeyT1, emotionKeyT2] = emotionKeySequence;

@@ -80,7 +80,7 @@ const EmotionList = ({
         onClick={onFinalEmotionSelect}
         disabled={isAddEmotionDisabled}
       >
-        add emotion {isAddEmotionDisabled.toString()}
+        add emotion
       </button>
     </div>
   );
