@@ -1,7 +1,6 @@
 import { Emotion } from "@/app/types/emotions";
 import Image from "next/image";
 import triangleRight from "/public/icons/triangleRight.svg";
-import { useEffect, useState } from "react";
 
 type EmotionButtonProps = {
   emotion: Emotion;

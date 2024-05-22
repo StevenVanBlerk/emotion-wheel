@@ -17,6 +17,15 @@ export default function Home() {
       else return [...previousState, emotionKeySequence];
     });
   };
+
+  const removeEmotionFromGroup = (emotionKey: string) => {
+    setEmotionGroup((previousState) => {
+      return previousState.filter((emotionKeySequence) => {
+        const relevantKey = emotionKeySequence[emotionKeySequence.length - 1];
+        return relevantKey !== emotionKey;
+      });
+    });
+  };
   return (
     <main className="font-raleway mx-auto flex min-h-screen max-w-screen-sm flex-col gap-4 pt-20 text-base font-normal">
       <blockquote className="pb-3 text-center italic">
@@ -29,10 +38,12 @@ export default function Home() {
       </blockquote>
       <EmotionSelection appendToEmotionGroup={appendToEmotionGroup} />
       {emotionGroup.length > 0 && (
-        <IntrospectiveQuestions emotionGroup={emotionGroup} />
+        <IntrospectiveQuestions
+          emotionGroup={emotionGroup}
+          removeEmotionFromGroup={removeEmotionFromGroup}
+        />
       )}
       {/* experiment with gradient background to focus on the center line */}
-      {/* make button full width */}
     </main>
   );
 }

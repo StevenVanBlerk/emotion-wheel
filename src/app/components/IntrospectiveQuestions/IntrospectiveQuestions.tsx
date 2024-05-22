@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import Question from "./Question";
 import { Card, SelectedEmotions } from "..";
 
-type IntroSpectiveQuestionsProps = { emotionGroup: string[][] };
+type IntroSpectiveQuestionsProps = {
+  emotionGroup: string[][];
+  removeEmotionFromGroup: (emotionKey: string) => void;
+};
 
 const IntrospectiveQuestions = ({
   emotionGroup,
+  removeEmotionFromGroup,
 }: IntroSpectiveQuestionsProps) => {
   const [step, setStep] = useState(0);
 
@@ -26,7 +30,10 @@ const IntrospectiveQuestions = ({
 
   return (
     <Card>
-      <SelectedEmotions emotionGroup={emotionGroup} />
+      <SelectedEmotions
+        emotionGroup={emotionGroup}
+        removeEmotionFromGroup={removeEmotionFromGroup}
+      />
       <Question
         label="Why am I feeling this way?"
         onSubmit={incrementStep}
