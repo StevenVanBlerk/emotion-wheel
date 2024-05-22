@@ -182,7 +182,7 @@ export const formatEmotionsInitialState = (
 export const staticEmotions: StaticEmotion[] = [
   {
     label: "Anger",
-    backgroundColor: "#F490B7",
+    backgroundColor: "#8B2B41",
     subEmotions: [
       {
         label: "Hurt",
@@ -284,7 +284,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Disgust",
-    backgroundColor: "#F5EF8D",
+    backgroundColor: "#616161",
     subEmotions: [
       {
         label: "Disapproval",
@@ -322,7 +322,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Sad",
-    backgroundColor: "#B3BCE4",
+    backgroundColor: "#1F5F77",
     subEmotions: [
       {
         label: "Guilty",
@@ -376,7 +376,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Happy",
-    backgroundColor: "#B8E29C",
+    backgroundColor: "#6C8B76",
     subEmotions: [
       {
         label: "Optimistic",
@@ -446,7 +446,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Surprise",
-    backgroundColor: "#B0E4E2",
+    backgroundColor: "#C4AA88",
     subEmotions: [
       {
         label: "Excited",
@@ -484,7 +484,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Fear",
-    backgroundColor: "#F7B193",
+    backgroundColor: "#D66D1C",
     subEmotions: [
       {
         label: "Scared",
@@ -537,3 +537,10 @@ export const staticEmotions: StaticEmotion[] = [
     ],
   },
 ];
+
+export const getBackgroundColor = (emotionKey: string) => {
+  const color = staticEmotions.find(
+    (emotion) => emotion.label === emotionKey,
+  )?.backgroundColor;
+  return color;
+};

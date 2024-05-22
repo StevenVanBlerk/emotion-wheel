@@ -7,6 +7,7 @@ type EmotionButtonProps = {
   emotionKeySequence: string[];
   onEmotionSelect: (emotionKeySequence: string[]) => void;
   onEmotionSubmit: (emotionKeySequence: string[]) => void;
+  parentBackgroundColour?: string;
 };
 
 const EmotionRecursiveButton = ({
@@ -14,6 +15,7 @@ const EmotionRecursiveButton = ({
   emotionKeySequence,
   onEmotionSelect,
   onEmotionSubmit,
+  parentBackgroundColour,
 }: EmotionButtonProps) => {
   const { label, subEmotions, isSelected, isActive, backgroundColor } = emotion;
 
@@ -22,11 +24,14 @@ const EmotionRecursiveButton = ({
 
   const cursorClassNames = `${isActive ? "cursor-pointer" : undefined}`;
   const hasSubEmotions = Object.keys(subEmotions).length > 0;
+
+  const emotionBackgroundColor = parentBackgroundColour || backgroundColor;
   return (
     <li className={`${isActive ? enabledClassNames : disabledClassNames}`}>
       {/* Buttons wrapper */}
       <div
         className={`text-md my-1 flex h-10 w-40 columns-1 rounded-md bg-primary text-primaryText`}
+        style={{ background: emotionBackgroundColor }}
       >
         {/* Expand button */}
         <button
@@ -44,21 +49,23 @@ const EmotionRecursiveButton = ({
                 className={`${isSelected ? "rotate-90" : "rotate-0"} transition-transform`}
               />
             )}
-            <label className="ml-2 ">{label}</label>
+            <label className="ml-2">{label}</label>
           </div>
         </button>
         {/* Submit button */}
         <button
-          className="ml-auto h-full rounded-r-md bg-secondary px-3"
+          className="relative ml-auto h-full rounded-r-md  px-3"
           disabled={!isActive}
           onClick={() => onEmotionSubmit(emotionKeySequence)}
         >
           <label
-            className={`${cursorClassNames} text-2xl`}
+            className={`${cursorClassNames} relative z-20 text-2xl`}
             aria-label={`select ${label}`}
           >
             +
           </label>
+          {/* dark opacity layer */}
+          <div className="absolute left-0 top-0 h-full w-full rounded-r-md bg-black opacity-15" />
         </button>
       </div>
       {/* SubEmotions */}
@@ -72,6 +79,7 @@ const EmotionRecursiveButton = ({
                 emotionKeySequence={[...emotionKeySequence, key]}
                 onEmotionSelect={onEmotionSelect}
                 onEmotionSubmit={onEmotionSubmit}
+                parentBackgroundColour={emotionBackgroundColor}
               />
             );
           })}

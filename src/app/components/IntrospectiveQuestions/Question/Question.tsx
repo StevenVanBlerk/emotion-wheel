@@ -30,7 +30,7 @@ const Question = ({
 
       {hasSubmitButton && (
         <button
-          className={`${isDisabled ? "opacity-50" : "opacity-100"} text-md mx-auto mt-3 flex h-10 items-center text-nowrap rounded bg-primary p-2 text-left text-primaryText`}
+          className={`${isDisabled ? "opacity-50" : "opacity-100"} text-md mx-auto mt-3 flex h-10 items-center text-nowrap rounded bg-secondary p-2 text-left text-primaryText`}
           onClick={() => {
             onSubmit();
             setIsDisabled(true);
