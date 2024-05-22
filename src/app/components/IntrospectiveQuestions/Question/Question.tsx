@@ -13,8 +13,10 @@ const Question = ({
   isVisible,
   hasSubmitButton = true,
 }: QuestionProps) => {
-  if (!isVisible) return;
   const [isDisabled, setIsDisabled] = useState(false);
+
+  if (!isVisible) return;
+
   return (
     <div className="radius bg-surfaceForeground border-surfaceBorder mt-8 border p-4">
       <label className="grid gap-1">
