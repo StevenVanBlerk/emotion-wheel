@@ -23,7 +23,7 @@ const Question = ({
         {label}
         <textarea
           placeholder="Think to yourself or write it down here.."
-          className="rounded p-2 text-sm"
+          className="rounded p-2 text-sm outline-primary"
           rows={6}
         />
       </label>
