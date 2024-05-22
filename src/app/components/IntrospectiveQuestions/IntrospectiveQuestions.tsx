@@ -1,55 +1,60 @@
-const IntrospectiveQuestions = () => {
-  return (
-    <div>
-      <div className="mt-8 grid grid-cols-[80%_20%]">
-        <label className="grid">
-          Why am I feeling this way? 🕒 (2 min) <TextArea />
-        </label>
+import { useEffect, useState } from "react";
+import Question from "./Question";
+import { Card, SelectedEmotions } from "..";
 
-        <button className="ml-8 rounded border-2 bg-gray-500">
-          I&apos;m ready to move on
-        </button>
-      </div>
-      <div className="mt-8 grid grid-cols-[80%_20%]">
-        <label className="grid">
-          What would I say to a friend feeling this way? 🕒 (2 min)
-          <TextArea />
-        </label>
-        <button className="ml-8 rounded border-2 bg-gray-500">
-          I&apos;m ready to move on
-        </button>
-      </div>
-      <div className="mt-8 grid grid-cols-[80%_20%]">
-        <label className="grid">
-          What can I do with this feeling? 🕒 (2 min)
-          <TextArea />
-        </label>
-        <button className="ml-8 rounded border-2 bg-gray-500">
-          I&apos;m ready to move on
-        </button>
-      </div>
-      <div className="mt-8 grid grid-cols-[80%_20%]">
-        <label className="grid">
-          Do I need help with this? 🕒 (2 min)
-          <TextArea />
-        </label>
-        <button className="ml-8 rounded border-2 bg-gray-500">
-          I&apos;m ready to move on
-        </button>
-      </div>
-      <div className="mt-8 grid grid-cols-[80%_20%]">
-        <label className="grid">
-          Who can help me with this? 🕒 (2 min)
-          <TextArea />
-        </label>
-        <button className="ml-8 rounded border-2 bg-gray-500">
-          I&apos;m ready to move on
-        </button>
-      </div>
-    </div>
+type IntroSpectiveQuestionsProps = { emotionGroup: string[][] };
+
+const IntrospectiveQuestions = ({
+  emotionGroup,
+}: IntroSpectiveQuestionsProps) => {
+  const [step, setStep] = useState(0);
+
+  const incrementStep = () => {
+    setStep((previousState) => previousState + 1);
+  };
+
+  // scrolling the next question into view
+  useEffect(() => {
+    if (step !== 0) {
+      const scrollHeight = document.documentElement.scrollHeight;
+      window.scrollTo({
+        top: scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [step]);
+
+  return (
+    <Card>
+      <SelectedEmotions emotionGroup={emotionGroup} />
+      <Question
+        label="Why am I feeling this way?"
+        onSubmit={incrementStep}
+        isVisible={step >= 0}
+      />
+      <Question
+        label="What would I say to a friend feeling this way?"
+        onSubmit={incrementStep}
+        isVisible={step >= 1}
+      />
+      <Question
+        label="What can I do with this feeling?"
+        onSubmit={incrementStep}
+        isVisible={step >= 2}
+      />
+      <Question
+        label="Do I need help?"
+        onSubmit={incrementStep}
+        isVisible={step >= 3}
+      />
+      <Question
+        label="Who can help me with this?"
+        onSubmit={incrementStep}
+        isVisible={step >= 4}
+        hasSubmitButton={false}
+      />
+    </Card>
   );
 };
 
 export default IntrospectiveQuestions;
-
-const TextArea = () => <textarea className="p-1 text-sm text-black" rows={4} />;

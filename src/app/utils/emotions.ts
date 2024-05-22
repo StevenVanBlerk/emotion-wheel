@@ -127,21 +127,10 @@ export const validateActiveStates = (
 
       // Evaluating T2 emotions
       Object.values(emotionT1.subEmotions).forEach((emotionT2) => {
-        // T1 emotions are inactive if their T0 parent is NOT selected
+        // T2 emotions are inactive if their T1 parent is NOT selected
         let isT2Active = true;
         if (!selectedEmotionKeySequence.includes(emotionT1.label))
           isT2Active = false;
-        // T2 emotions are inactive if any T2 siblings are selected
-        for (const siblingKey in emotionT1.subEmotions) {
-          if (!isT2Active) break; //no need to keep evaluating T2
-          const siblingEmotion = emotionT1.subEmotions[siblingKey];
-          if (
-            siblingEmotion.label !== emotionT2.label &&
-            siblingEmotion.isSelected
-          ) {
-            isT2Active = false;
-          }
-        }
         emotionT2.isActive = isT2Active;
       });
     });
@@ -171,10 +160,17 @@ export const formatEmotionsInitialState = (
   staticEmotions: StaticEmotion[],
 ): EmotionMap => {
   const formattedEmotions: EmotionMap = {};
+
+  const backgroundColors = ["#656839"];
+  let backgroundColorsIndex = 0;
+  // Math.floor(
+  //   Math.random() * backgroundColors.length,
+  // );
+
   staticEmotions.forEach((staticEmotion) => {
     const emotion = {
       label: staticEmotion.label,
-      color: staticEmotion.color,
+      backgroundColor: backgroundColors[backgroundColorsIndex], //staticEmotion.backgroundColor,
       isSelected: false,
       isActive: [
         "Anger",
@@ -187,6 +183,10 @@ export const formatEmotionsInitialState = (
       subEmotions: formatEmotionsInitialState(staticEmotion.subEmotions),
     };
     formattedEmotions[emotion.label] = emotion;
+
+    backgroundColorsIndex++;
+    if (backgroundColorsIndex === backgroundColors.length)
+      backgroundColorsIndex = 0;
   });
   return formattedEmotions;
 };
@@ -194,312 +194,356 @@ export const formatEmotionsInitialState = (
 export const staticEmotions: StaticEmotion[] = [
   {
     label: "Anger",
-    color: "pink",
+    backgroundColor: "#F490B7",
     subEmotions: [
       {
         label: "Hurt",
+        backgroundColor: "#E7A3CD",
         subEmotions: [
           {
             label: "Embarrassed",
+            backgroundColor: "#DE94C3",
             subEmotions: [],
           },
-          { label: "Devastated", subEmotions: [] },
+          { label: "Devastated", backgroundColor: "#C394C2", subEmotions: [] },
         ],
       },
       {
         label: "Threatened",
+        backgroundColor: "#C8A3C5",
         subEmotions: [
           {
             label: "Insecure",
+            backgroundColor: "",
             subEmotions: [],
           },
-          { label: "Jealous", subEmotions: [] },
+          { label: "Jealous", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Hateful",
+        backgroundColor: "#E7A3CD",
         subEmotions: [
           {
             label: "Resentful",
+            backgroundColor: "",
             subEmotions: [],
           },
-          { label: "Violated", subEmotions: [] },
+          { label: "Violated", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Mad",
+        backgroundColor: "#C8A3C5",
         subEmotions: [
           {
             label: "Furious",
+            backgroundColor: "",
             subEmotions: [],
           },
-          { label: "Enraged", subEmotions: [] },
+          { label: "Enraged", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Aggressive",
+        backgroundColor: "#E7A3CD",
         subEmotions: [
           {
             label: "Provoked",
+            backgroundColor: "",
             subEmotions: [],
           },
-          { label: "Hostile", subEmotions: [] },
+          { label: "Hostile", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Frustrated",
+        backgroundColor: "#C8A3C5",
         subEmotions: [
           {
             label: "Infuriated",
+            backgroundColor: "",
             subEmotions: [],
           },
-          { label: "Irritated", subEmotions: [] },
+          { label: "Irritated", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Distant",
+        backgroundColor: "#E7A3CD",
         subEmotions: [
           {
             label: "Withdrawn",
+            backgroundColor: "",
             subEmotions: [],
           },
-          { label: "Suspicious", subEmotions: [] },
+          { label: "Suspicious", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Critical",
+        backgroundColor: "#C8A3C5",
         subEmotions: [
           {
             label: "Skeptical",
+            backgroundColor: "",
             subEmotions: [],
           },
-          { label: "Sarcastic", subEmotions: [] },
+          { label: "Sarcastic", backgroundColor: "", subEmotions: [] },
         ],
       },
     ],
   },
   {
     label: "Disgust",
-    color: "brown",
+    backgroundColor: "#F5EF8D",
     subEmotions: [
       {
         label: "Disapproval",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Judgemental", subEmotions: [] },
-          { label: "Loathing", subEmotions: [] },
+          { label: "Judgemental", backgroundColor: "", subEmotions: [] },
+          { label: "Loathing", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Disappointed",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Repugnant", subEmotions: [] },
-          { label: "Revolted", subEmotions: [] },
+          { label: "Repugnant", backgroundColor: "", subEmotions: [] },
+          { label: "Revolted", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Awful",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Revulsion", subEmotions: [] },
-          { label: "Detestable", subEmotions: [] },
+          { label: "Revulsion", backgroundColor: "", subEmotions: [] },
+          { label: "Detestable", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Avoidance",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Aversion", subEmotions: [] },
-          { label: "Hesitant", subEmotions: [] },
+          { label: "Aversion", backgroundColor: "", subEmotions: [] },
+          { label: "Hesitant", backgroundColor: "", subEmotions: [] },
         ],
       },
     ],
   },
   {
     label: "Sad",
-    color: "lightblue",
+    backgroundColor: "#B3BCE4",
     subEmotions: [
       {
         label: "Guilty",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Remorseful", subEmotions: [] },
-          { label: "Ashamed", subEmotions: [] },
+          { label: "Remorseful", backgroundColor: "", subEmotions: [] },
+          { label: "Ashamed", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Abandoned",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Ignored", subEmotions: [] },
-          { label: "Victimised", subEmotions: [] },
+          { label: "Ignored", backgroundColor: "", subEmotions: [] },
+          { label: "Victimised", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Despair",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Powerless", subEmotions: [] },
-          { label: "Vulnerable", subEmotions: [] },
+          { label: "Powerless", backgroundColor: "", subEmotions: [] },
+          { label: "Vulnerable", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Depressed",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Inferior", subEmotions: [] },
-          { label: "Empty", subEmotions: [] },
+          { label: "Inferior", backgroundColor: "", subEmotions: [] },
+          { label: "Empty", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Lonely",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Abandoned", subEmotions: [] },
-          { label: "Isolated", subEmotions: [] },
+          { label: "Abandoned", backgroundColor: "", subEmotions: [] },
+          { label: "Isolated", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Bored",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Apathetic", subEmotions: [] },
-          { label: "Indifferent", subEmotions: [] },
+          { label: "Apathetic", backgroundColor: "", subEmotions: [] },
+          { label: "Indifferent", backgroundColor: "", subEmotions: [] },
         ],
       },
     ],
   },
   {
     label: "Happy",
-    color: "orange",
+    backgroundColor: "#B8E29C",
     subEmotions: [
       {
         label: "Optimistic",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Inspired", subEmotions: [] },
-          { label: "Open", subEmotions: [] },
+          { label: "Inspired", backgroundColor: "", subEmotions: [] },
+          { label: "Open", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Intimate",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Playful", subEmotions: [] },
-          { label: "Sensitive", subEmotions: [] },
+          { label: "Playful", backgroundColor: "", subEmotions: [] },
+          { label: "Sensitive", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Peaceful",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Hopeful", subEmotions: [] },
-          { label: "Loving", subEmotions: [] },
+          { label: "Hopeful", backgroundColor: "", subEmotions: [] },
+          { label: "Loving", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Powerful",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Provocative", subEmotions: [] },
-          { label: "Courageous", subEmotions: [] },
+          { label: "Provocative", backgroundColor: "", subEmotions: [] },
+          { label: "Courageous", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Accepted",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Fulfilled", subEmotions: [] },
-          { label: "Respected", subEmotions: [] },
+          { label: "Fulfilled", backgroundColor: "", subEmotions: [] },
+          { label: "Respected", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Proud",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Confident", subEmotions: [] },
-          { label: "Important", subEmotions: [] },
+          { label: "Confident", backgroundColor: "", subEmotions: [] },
+          { label: "Important", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Interested",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Inquisitive", subEmotions: [] },
-          { label: "Amused", subEmotions: [] },
+          { label: "Inquisitive", backgroundColor: "", subEmotions: [] },
+          { label: "Amused", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Joyful",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Estatic", subEmotions: [] },
-          { label: "Liberated", subEmotions: [] },
+          { label: "Estatic", backgroundColor: "", subEmotions: [] },
+          { label: "Liberated", backgroundColor: "", subEmotions: [] },
         ],
       },
     ],
   },
   {
     label: "Surprise",
-    color: "lightgreen",
+    backgroundColor: "#B0E4E2",
     subEmotions: [
       {
         label: "Excited",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Energetic", subEmotions: [] },
-          { label: "Eager", subEmotions: [] },
+          { label: "Energetic", backgroundColor: "", subEmotions: [] },
+          { label: "Eager", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Amazed",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Awe", subEmotions: [] },
-          { label: "Astonished", subEmotions: [] },
+          { label: "Awe", backgroundColor: "", subEmotions: [] },
+          { label: "Astonished", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Confused",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Perplexed", subEmotions: [] },
-          { label: "Disillusioned", subEmotions: [] },
+          { label: "Perplexed", backgroundColor: "", subEmotions: [] },
+          { label: "Disillusioned", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Startled",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Dismayed", subEmotions: [] },
-          { label: "Shocked", subEmotions: [] },
+          { label: "Dismayed", backgroundColor: "", subEmotions: [] },
+          { label: "Shocked", backgroundColor: "", subEmotions: [] },
         ],
       },
     ],
   },
   {
     label: "Fear",
-    color: "yellow",
+    backgroundColor: "#F7B193",
     subEmotions: [
       {
         label: "Scared",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Terrified", subEmotions: [] },
-          { label: "Frightened", subEmotions: [] },
+          { label: "Terrified", backgroundColor: "", subEmotions: [] },
+          { label: "Frightened", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Anxious",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Overwhelmed", subEmotions: [] },
-          { label: "Worried", subEmotions: [] },
+          { label: "Overwhelmed", backgroundColor: "", subEmotions: [] },
+          { label: "Worried", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Insecure",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Inadequate", subEmotions: [] },
-          { label: "Inferior", subEmotions: [] },
+          { label: "Inadequate", backgroundColor: "", subEmotions: [] },
+          { label: "Inferior", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Submissive",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Worthless", subEmotions: [] },
-          { label: "Insignificant", subEmotions: [] },
+          { label: "Worthless", backgroundColor: "", subEmotions: [] },
+          { label: "Insignificant", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Rejected",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Inadequate", subEmotions: [] },
-          { label: "Alienated", subEmotions: [] },
+          { label: "Inadequate", backgroundColor: "", subEmotions: [] },
+          { label: "Alienated", backgroundColor: "", subEmotions: [] },
         ],
       },
       {
         label: "Humiliated",
+        backgroundColor: "",
         subEmotions: [
-          { label: "Disrespected", subEmotions: [] },
-          { label: "Ridiculed", subEmotions: [] },
+          { label: "Disrespected", backgroundColor: "", subEmotions: [] },
+          { label: "Ridiculed", backgroundColor: "", subEmotions: [] },
         ],
       },
     ],

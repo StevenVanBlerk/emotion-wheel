@@ -16,7 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    // TO-DO use new theme variables
+    <html lang="en" className="bg-background text-text">
       <body className={inter.className}>{children}</body>
     </html>
   );

@@ -1,6 +1,6 @@
 export type StaticEmotion = {
   label: string;
-  color?: string;
+  backgroundColor?: string;
   subEmotions: StaticEmotion[];
 };
 
@@ -10,7 +10,7 @@ export type Emotion = {
   /** Whether or not this emotion requires the user's attention */
   isActive: boolean;
   isSelected: boolean;
-  color?: string;
+  backgroundColor?: string;
 };
 
 export type EmotionMap = { [key: string]: Emotion };

@@ -10,8 +10,9 @@ import EmotionList from "./EmotionList";
 type EmotionSelectionProps = {
   appendToEmotionGroup: (emotionKeySequence: string[]) => void;
 };
-const initialEmotions = formatEmotionsInitialState(staticEmotions);
+
 const EmotionSelection = ({ appendToEmotionGroup }: EmotionSelectionProps) => {
+  const initialEmotions = formatEmotionsInitialState(staticEmotions);
   const [emotions, setEmotions] = useState<EmotionMap>(initialEmotions);
 
   const [selectedEmotionKeySequence, setSelectedEmotionKeySequence] = useState<
@@ -22,22 +23,26 @@ const EmotionSelection = ({ appendToEmotionGroup }: EmotionSelectionProps) => {
     setEmotions(initialEmotions);
     setSelectedEmotionKeySequence([]);
   };
+
+  const handleEmotionSubmit = (emotionKeySequence: string[]) => {
+    appendToEmotionGroup(emotionKeySequence);
+    resetEmotions();
+  };
+
+  const handleEmotionSelection = (emotionKeySequence: string[]) => {
+    onEmotionSelect(
+      emotionKeySequence,
+      JSON.parse(JSON.stringify(emotions)) as EmotionMap,
+      setEmotions,
+      setSelectedEmotionKeySequence,
+    );
+  };
+
   return (
     <EmotionList
       emotions={emotions}
-      onFinalEmotionSelect={() => {
-        appendToEmotionGroup(selectedEmotionKeySequence);
-        resetEmotions();
-      }}
-      onEmotionSelect={(emotionKeySequence) => {
-        onEmotionSelect(
-          emotionKeySequence,
-          JSON.parse(JSON.stringify(emotions)) as EmotionMap,
-          setEmotions,
-          setSelectedEmotionKeySequence,
-        );
-      }}
-      isAddEmotionDisabled={selectedEmotionKeySequence.length === 0}
+      onEmotionSubmit={handleEmotionSubmit}
+      onEmotionSelect={handleEmotionSelection}
     />
   );
 };
