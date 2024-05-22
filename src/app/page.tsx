@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  SelectedEmotions,
-  IntrospectiveQuestions,
-  EmotionSelection,
-} from "./components";
+import { IntrospectiveQuestions, EmotionSelection } from "./components";
 import { useState } from "react";
 
 export default function Home() {
