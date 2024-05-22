@@ -1,5 +1,6 @@
 # Emotion wheel
 [🔗 See this project in action](https://emotion-wheel.vercel.app/)
+
 [🔗 Presentation slides explaining the project](https://docs.google.com/presentation/d/1KIN8MovkwBSMk_z6QMybncnMktkD2XIXIF2l1AMouFA/edit?usp=sharing)
 
 This project was built as part of the Healthy Gamer MAYke-IT 2024 hackathon.
