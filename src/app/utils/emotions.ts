@@ -446,7 +446,7 @@ export const staticEmotions: StaticEmotion[] = [
   },
   {
     label: "Surprise",
-    backgroundColor: "#C4AA88",
+    backgroundColor: "#B39C7E",
     subEmotions: [
       {
         label: "Excited",
