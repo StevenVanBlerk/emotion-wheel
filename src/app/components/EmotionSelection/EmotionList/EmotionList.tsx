@@ -17,7 +17,10 @@ const EmotionList = ({
 
   return (
     <div>
-      <ul className="flex flex-col flex-wrap gap-x-2">
+      <ul
+        className="flex flex-col flex-wrap gap-x-2"
+        style={{ paddingLeft: "180px" }} // bandaid fix to center emotion columns
+      >
         {emotionsT0.map(([keyT0, emotionT0]) => {
           return (
             <EmotionRecursiveButton
