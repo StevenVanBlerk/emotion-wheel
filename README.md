@@ -4,7 +4,8 @@
 This project was built as part of the Healthy Gamer MAYke-IT 2024 hackathon.
 
 The intention of this project is to be a web based interactive emotion wheel. An emotion wheel is a commonly used tool to help people identify their own emotions, there is an example below 👇
-The person starts at the more vague emotions at the center and then closes in on a more specific emotion by spanning out from there.
+The person starts at the more vague emotions at the center and then closes in on a more specific emotion by spanning out from there. This project also offers some time for introspection once some emotions
+have been found.
 
 ![image](https://github.com/StevenVanBlerk/emotion-wheel/assets/82337557/e2096376-3c3f-46c3-9e8b-56a49f4f7b94)
 
