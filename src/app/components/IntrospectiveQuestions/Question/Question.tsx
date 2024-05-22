@@ -18,15 +18,15 @@ const Question = ({
   if (!isVisible) return;
 
   return (
-    <div className="radius bg-surfaceForeground border-surfaceBorder mt-8 border p-4">
-      <label className="grid gap-1">
+    <div className="radius mt-8 border border-surfaceBorder bg-surfaceForeground p-4">
+      <label className="grid gap-2">
         {label}
-        <textarea className="pt-2 text-sm" rows={4} />
+        <textarea className="rounded p-2 text-sm" rows={6} />
       </label>
 
       {hasSubmitButton && (
         <button
-          className={`${isDisabled ? "opacity-50" : "opacity-100"} bg-primary text-md text-primaryText ml-auto mt-2 flex h-10 items-center text-nowrap rounded p-2 text-left`}
+          className={`${isDisabled ? "opacity-50" : "opacity-100"} text-md mx-auto mt-3 flex h-10 items-center text-nowrap rounded bg-primary p-2 text-left text-primaryText`}
           onClick={() => {
             onSubmit();
             setIsDisabled(true);

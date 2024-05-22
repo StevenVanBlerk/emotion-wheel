@@ -9,19 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // secondary: "#5EA5EE", // offerzen blue
+        // primary: "#5395D8", // slightly darker than offerzen blue
         background: "#EEF3F6",
-        text: "#222", //"rgb(124, 124, 128)",
-        primary: "#5395D8",
+        text: "#222",
+        primary: "#6C8B76",
         primaryText: "#fff",
-        secondary: "#5EA5EE",
+        secondary: "#7FA28A", // dayne williams green
         secondaryText: "#000",
         surfaceBackground: "#FFFFFF",
         surfaceForeground: "#F9FAFB",
         surfaceBorder: "rgb(228, 235, 239)",
       },
       fontFamily: {
-        sans: ["Graphik", "sans-serif"],
-        serif: ["Merriweather", "serif"],
+        raleway: ['"Raleway"', "sans-serif"],
       },
     },
   },

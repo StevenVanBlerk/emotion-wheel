@@ -24,11 +24,11 @@ const EmotionRecursiveButton = ({
   return (
     <li className={`${isActive ? enabledClassNames : disabledClassNames}`}>
       {/* Buttons wrapper */}
-      <div className="bg-secondary text-md text-primaryText my-4 flex h-10 w-40 rounded-md">
+      <div className="text-md my-4 flex h-10 w-40 rounded-md bg-secondary text-primaryText">
         {/* Expand button */}
         <button
           onClick={() => onEmotionSelect(emotionKeySequence)}
-          disabled={!isActive}
+          disabled={!isActive || !hasSubEmotions}
           aria-label={`expand ${label}`}
           className={`${isSelected && "opacity-70"} w-full`}
         >
@@ -39,7 +39,7 @@ const EmotionRecursiveButton = ({
         </button>
         {/* Submit button */}
         <button
-          className="bg-primary ml-auto h-full rounded-r-md px-3"
+          className="ml-auto h-full rounded-r-md bg-primary px-3"
           onClick={() => onEmotionSubmit(emotionKeySequence)}
         >
           <label

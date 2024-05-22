@@ -22,9 +22,15 @@ export default function Home() {
     });
   };
   return (
-    <main className="mx-auto flex min-h-screen max-w-screen-sm flex-col p-4 text-base">
+    <main className="font-raleway mx-auto flex min-h-screen max-w-screen-sm flex-col gap-4 pt-8 text-base font-light">
+      <blockquote className="pb-3 text-center italic">
+        ❝Anything that's human is mentionable, and anything that is mentionable
+        can be more manageable. When we can talk about our feelings, they become
+        less overwhelming, less upsetting, and less scary. The people we trust
+        with that important talk can help us know that we are not alone.❞
+        <span className="not-italic"> - Mr. Rogers</span>
+      </blockquote>
       <EmotionSelection appendToEmotionGroup={appendToEmotionGroup} />
-
       {emotionGroup.length > 0 && (
         <IntrospectiveQuestions emotionGroup={emotionGroup} />
       )}

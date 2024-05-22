@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     // TO-DO use new theme variables
-    <html lang="en" className="bg-background text-text">
+    <html lang="en" className="font-raleway bg-background font-light text-text">
       <body className={inter.className}>{children}</body>
     </html>
   );
