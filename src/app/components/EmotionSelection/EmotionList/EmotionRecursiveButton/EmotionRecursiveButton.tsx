@@ -23,8 +23,8 @@ const EmotionRecursiveButton = ({
   const cursorClassNames = `${isActive ? "cursor-pointer" : undefined}`;
   const hasSubEmotions = Object.keys(subEmotions).length > 0;
   return (
-    // <li className={`${isActive ? enabledClassNames : disabledClassNames}`}>
-    <li className={`${isActive ? enabledClassNames : disabledClassNames} flex`}>
+    <li className={`${isActive ? enabledClassNames : disabledClassNames}`}>
+      {/* <li className={`${isActive ? enabledClassNames : disabledClassNames} flex`}> */}
       {/* Buttons wrapper */}
       <div
         className={`text-md my-1 flex h-10 w-40 columns-1 rounded-md bg-secondary text-primaryText`}
@@ -64,8 +64,8 @@ const EmotionRecursiveButton = ({
       </div>
       {/* SubEmotions */}
       {subEmotions && isSelected && (
-        // <ul className="ml-16 flex flex-col gap-x-2">
-        <ul className="ml-2 flex flex-col gap-x-2">
+        <ul className="ml-16 flex flex-col gap-x-2">
+          {/* // <ul className="ml-2 flex flex-col gap-x-2"> */}
           {Object.entries(subEmotions).map(([key, subEmotion]) => {
             return (
               <EmotionRecursiveButton
