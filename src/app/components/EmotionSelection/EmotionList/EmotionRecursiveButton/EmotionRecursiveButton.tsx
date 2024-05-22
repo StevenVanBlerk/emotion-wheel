@@ -24,7 +24,7 @@ const EmotionRecursiveButton = ({
   return (
     <li className={`${isActive ? enabledClassNames : disabledClassNames}`}>
       {/* Buttons wrapper */}
-      <div className="text-md my-4 flex h-10 w-40 rounded-md bg-secondary text-primaryText">
+      <div className="text-md my-1 flex h-10 w-40 rounded-md bg-secondary text-primaryText">
         {/* Expand button */}
         <button
           onClick={() => onEmotionSelect(emotionKeySequence)}
@@ -51,7 +51,7 @@ const EmotionRecursiveButton = ({
         </button>
       </div>
       {subEmotions && (
-        <ul className="flex flex-wrap gap-x-2">
+        <ul className="flex flex-wrap gap-x-2 ml-6">
           {Object.entries(subEmotions).map(([key, subEmotion]) => {
             return (
               <EmotionRecursiveButton

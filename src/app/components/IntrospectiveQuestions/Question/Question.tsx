@@ -21,7 +21,11 @@ const Question = ({
     <div className="radius mt-8 border border-surfaceBorder bg-surfaceForeground p-4">
       <label className="grid gap-2">
         {label}
-        <textarea className="rounded p-2 text-sm" rows={6} />
+        <textarea
+          placeholder="Write something down or think to yourself"
+          className="rounded p-2 text-sm"
+          rows={6}
+        />
       </label>
 
       {hasSubmitButton && (

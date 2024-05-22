@@ -12,6 +12,7 @@ const SelectedEmotions = ({ emotionGroup }: SelectedEmotionsProps) => {
           const emotionLabel = emotionKeyT2 || emotionKeyT1 || emotionKeyT0;
           return <Pill key={emotionLabel} label={emotionLabel} />;
         })}
+        add remove button
       </ul>
     </Card>
   );

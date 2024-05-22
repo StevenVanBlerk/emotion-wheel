@@ -16,7 +16,7 @@ const EmotionList = ({
   const emotionsT0 = Object.entries(emotions);
 
   return (
-    <Card>
+    <div>
       <ul className="flex flex-wrap gap-x-2">
         {emotionsT0.map(([keyT0, emotionT0]) => {
           if (!emotionT0.isActive) return;
@@ -32,7 +32,7 @@ const EmotionList = ({
           );
         })}
       </ul>
-    </Card>
+    </div>
   );
 };
 
