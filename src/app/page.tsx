@@ -20,10 +20,12 @@ export default function Home() {
   return (
     <main className="font-raleway mx-auto flex min-h-screen max-w-screen-sm flex-col gap-4 pt-8 text-base font-light">
       <blockquote className="pb-3 text-center italic">
-        ❝Anything that's human is mentionable, and anything that is mentionable
+        {/* {`❝`} */}
+        Anything that&apos;s human is mentionable, and anything that is mentionable
         can be more manageable. When we can talk about our feelings, they become
         less overwhelming, less upsetting, and less scary. The people we trust
-        with that important talk can help us know that we are not alone.❞
+        with that important talk can help us know that we are not alone.
+        {/* {`❞`} */}
         <span className="not-italic"> - Mr. Rogers</span>
       </blockquote>
       <EmotionSelection appendToEmotionGroup={appendToEmotionGroup} />
