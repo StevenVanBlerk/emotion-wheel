@@ -19,8 +19,6 @@ const EmotionList = ({
     <div>
       <ul className="flex flex-col flex-wrap gap-x-2">
         {emotionsT0.map(([keyT0, emotionT0]) => {
-          if (!emotionT0.isActive) return;
-
           return (
             <EmotionRecursiveButton
               key={keyT0}
@@ -28,7 +26,6 @@ const EmotionList = ({
               emotionKeySequence={[keyT0]}
               onEmotionSelect={onEmotionSelect}
               onEmotionSubmit={onEmotionSubmit}
-              // isAnimated prop
             />
           );
         })}

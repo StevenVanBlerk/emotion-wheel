@@ -18,23 +18,20 @@ export default function Home() {
     });
   };
   return (
-    <main className="font-raleway mx-auto flex min-h-screen max-w-screen-sm flex-col gap-4 pt-8 text-base font-light">
-      <blockquote
-        className="pb-3 text-center italic"
-        style={{ marginTop: "8px", marginBottom: "16px" }}
-      >
-        ❝Anything that&apos;s human is mentionable, and anything that is
+    <main className="font-raleway mx-auto flex min-h-screen max-w-screen-sm flex-col gap-4 pt-20 text-base font-normal">
+      <blockquote className="pb-3 text-center italic">
+        ❝ Anything that&apos;s human is mentionable, and anything that is
         mentionable can be more manageable. When we can talk about our feelings,
         they become less overwhelming, less upsetting, and less scary. The
         people we trust with that important talk can help us know that we are
-        not alone.❞<span className="not-italic"> - Mr. Rogers</span>
+        not alone.❞
+        <span className="not-italic"> - Mr. Rogers</span>
       </blockquote>
       <EmotionSelection appendToEmotionGroup={appendToEmotionGroup} />
       {emotionGroup.length > 0 && (
         <IntrospectiveQuestions emotionGroup={emotionGroup} />
       )}
       {/* experiment with gradient background to focus on the center line */}
-      {/* rotate > when selected */}
       {/* make button full width */}
     </main>
   );

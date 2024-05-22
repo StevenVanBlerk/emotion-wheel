@@ -9,8 +9,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // secondary: "#5EA5EE", // offerzen blue
-        // primary: "#5395D8", // slightly darker than offerzen blue
         background: "#EEF3F6",
         text: "#222",
         primary: "#6C8B76",

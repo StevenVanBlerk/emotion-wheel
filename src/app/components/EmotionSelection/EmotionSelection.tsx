@@ -15,13 +15,8 @@ const EmotionSelection = ({ appendToEmotionGroup }: EmotionSelectionProps) => {
   const initialEmotions = formatEmotionsInitialState(staticEmotions);
   const [emotions, setEmotions] = useState<EmotionMap>(initialEmotions);
 
-  const [selectedEmotionKeySequence, setSelectedEmotionKeySequence] = useState<
-    string[]
-  >([]);
-
   const resetEmotions = () => {
     setEmotions(initialEmotions);
-    setSelectedEmotionKeySequence([]);
   };
 
   const handleEmotionSubmit = (emotionKeySequence: string[]) => {
@@ -34,7 +29,6 @@ const EmotionSelection = ({ appendToEmotionGroup }: EmotionSelectionProps) => {
       emotionKeySequence,
       JSON.parse(JSON.stringify(emotions)) as EmotionMap,
       setEmotions,
-      setSelectedEmotionKeySequence,
     );
   };
 

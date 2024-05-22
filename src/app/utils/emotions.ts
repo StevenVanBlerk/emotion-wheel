@@ -56,7 +56,6 @@ export const onEmotionSelect = (
   emotionKeySequence: string[],
   emotionsCopy: EmotionMap,
   setEmotions: React.Dispatch<React.SetStateAction<EmotionMap>>,
-  setSelectedEmotionKeySequence: React.Dispatch<React.SetStateAction<string[]>>,
 ) => {
   const [emotionKeyT0, emotionKeyT1, emotionKeyT2] = emotionKeySequence;
   const emotionT0 = emotionsCopy[emotionKeyT0];
@@ -89,7 +88,6 @@ export const onEmotionSelect = (
   validateActiveStates(emotionsCopy, newSelectedEmotionKeySequence);
 
   setEmotions(emotionsCopy);
-  setSelectedEmotionKeySequence(newSelectedEmotionKeySequence);
 };
 
 export const validateActiveStates = (
@@ -161,16 +159,10 @@ export const formatEmotionsInitialState = (
 ): EmotionMap => {
   const formattedEmotions: EmotionMap = {};
 
-  const backgroundColors = ["#656839"];
-  let backgroundColorsIndex = 0;
-  // Math.floor(
-  //   Math.random() * backgroundColors.length,
-  // );
-
   staticEmotions.forEach((staticEmotion) => {
     const emotion = {
       label: staticEmotion.label,
-      backgroundColor: backgroundColors[backgroundColorsIndex], //staticEmotion.backgroundColor,
+      backgroundColor: staticEmotion.backgroundColor,
       isSelected: false,
       isActive: [
         "Anger",
@@ -183,10 +175,6 @@ export const formatEmotionsInitialState = (
       subEmotions: formatEmotionsInitialState(staticEmotion.subEmotions),
     };
     formattedEmotions[emotion.label] = emotion;
-
-    backgroundColorsIndex++;
-    if (backgroundColorsIndex === backgroundColors.length)
-      backgroundColorsIndex = 0;
   });
   return formattedEmotions;
 };

@@ -22,7 +22,7 @@ const Question = ({
       <label className="grid gap-2">
         {label}
         <textarea
-          placeholder="Write something down or think to yourself"
+          placeholder="Think to yourself or write it down here.."
           className="rounded p-2 text-sm"
           rows={6}
         />
