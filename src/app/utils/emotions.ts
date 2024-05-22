@@ -542,5 +542,5 @@ export const getBackgroundColor = (emotionKey: string) => {
   const color = staticEmotions.find(
     (emotion) => emotion.label === emotionKey,
   )?.backgroundColor;
-  return color;
+  return color || "bg-primary";
 };

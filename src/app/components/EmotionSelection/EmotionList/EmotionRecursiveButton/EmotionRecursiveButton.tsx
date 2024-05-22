@@ -30,7 +30,7 @@ const EmotionRecursiveButton = ({
     <li className={`${isActive ? enabledClassNames : disabledClassNames}`}>
       {/* Buttons wrapper */}
       <div
-        className={`text-md my-1 flex h-10 w-40 columns-1 rounded-md bg-primary text-primaryText`}
+        className={`text-md my-1 flex h-10 w-40 columns-1 rounded-md text-primaryText`}
         style={{ background: emotionBackgroundColor }}
       >
         {/* Expand button */}
